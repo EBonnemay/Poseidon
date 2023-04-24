@@ -13,9 +13,15 @@ import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.*;
 
-
-
-//@Validated VALIDATED COMBINED WITH VALID CREATES 500 ERROR INSTEAD OF DISPLAYING ERROR ON HTML
+/**
+ * This class is a controller dedicated to User entities ; it handles admin requests related to User :
+ * displaying several pages (list, update form, add form), retrieving User data when necessary,
+ * and handling crud requests by calling User Service.
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ *
+ */
 @Controller
 public class UserController {
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
@@ -45,8 +51,6 @@ public class UserController {
     public String validateUser(@Valid User user, BindingResult result, Model model) {
 
         log.info("POST /user/validate for username " + user.getUsername());
-        /*
-        }*/
         try {
             if (result.hasErrors()) {
                 log.error("user to create has errors");
@@ -55,8 +59,6 @@ public class UserController {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             user.setPassword(encoder.encode(user.getPassword()));
             userService.validateNewUser(user);
-            //model.addAttribute("users", userService.findAllUsers());
-            log.info("user " + user.getUsername() + "saved");
         } catch (Exception e) {
             log.error("user could not be created");
             return "user/add";
@@ -71,7 +73,6 @@ public class UserController {
             User user = userService.getById(userId);
             user.setPassword("");
             model.addAttribute("user", user);
-            log.info("user "+ user.getId()+ " retrieved");
             return "user/update";
         }catch(Exception e){
             log.error("user update form with id "+ userId +" could not be displayed");
@@ -94,7 +95,6 @@ public class UserController {
             user.setPassword(encoder.encode(user.getPassword()));
 
             userService.updateUser(id, user);
-            //model.addAttribute("users", userRepository.findAll());
             log.info ("user with id "+ user.getId() + " is saved" );
         }catch(Exception e){
             log.error("user with id "+id+" could not be update");

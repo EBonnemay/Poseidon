@@ -5,7 +5,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
-
+/**
+ * This entity class defines Rating objects. It has two constructors : one without parameter,
+ * one with parameters 'moodys_rating', 'sandprating' , 'fitch_rating', 'order_number'.
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 
 @Entity
 @Table(name = "rating")
@@ -41,10 +47,4 @@ public class Rating {
     @NotNull (message = "order_number is mandatory")
     @PositiveOrZero(message = "order_number be positive or zero")
     Integer order_number;
-
-
-
-
-
-    // TODO: Map columns in data table RATING with corresponding java fields
 }

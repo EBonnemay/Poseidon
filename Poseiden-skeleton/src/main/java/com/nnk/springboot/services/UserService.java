@@ -11,7 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * This class handles User CRUD operations by calling User Repository : save, read (get User by Id , find All Users), update, delete.
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 @Service
 public class UserService {
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
@@ -54,9 +58,13 @@ public class UserService {
         userRepository.delete(user);
 
     }
+    /**
+     * This method retrieves the connected user's name.
+     * @author Emmanuelle Bonnemay
+     * created on 23/04/2023
+     */
     public String userNameOfCurrentUser()throws Exception{
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        //String userNameOfCurrentUser = auth.getName();
         return auth.getName();
     }
 

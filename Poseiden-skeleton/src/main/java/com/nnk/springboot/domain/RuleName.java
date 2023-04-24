@@ -4,7 +4,13 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
-
+/**
+ * This entity class defines RuleName objects. It has two constructors : one without parameter,
+ * one with parameters 'name', 'description' , 'json', 'template', 'sql_str', 'sql_part'
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 @Entity
 @Table(name = "rulename")
 @Getter
@@ -48,7 +54,4 @@ public class RuleName {
 
     @Column(name="rulename")
     Integer rulename;
-
-
-    // TODO: Map columns in data table RULENAME with corresponding java fields
 }

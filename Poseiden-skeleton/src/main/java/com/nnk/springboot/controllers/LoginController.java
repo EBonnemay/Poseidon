@@ -9,7 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
+/**
+ * This class is a controller dedicated to login page, displaying this page when /login GET request is done by user.
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ *
+ */
 @Controller
 @RequestMapping("app")
 public class LoginController {
@@ -30,7 +36,6 @@ public class LoginController {
         log.info("GET /login");
         ModelAndView mav = new ModelAndView();
         mav.setViewName("login");
-        log.info("ModelAndView mav has name set to 'login'");
         return mav;
     }
 
@@ -41,7 +46,6 @@ public class LoginController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("users", userRepository.findAll());
         mav.setViewName("user/list");
-        log.info("Model And View mav has name set to 'user/list'");
         return mav;
     }
 }

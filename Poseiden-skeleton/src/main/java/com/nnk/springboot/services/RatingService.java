@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * This class handles Rating CRUD operations by calling Rating Repository : save, read (get Rating by Id , find All Ratings), update, delete.
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 @Service
 public class RatingService {
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
@@ -36,7 +40,6 @@ public class RatingService {
         formerRating.setSandprating(updatedRatingEntity.getSandprating());
         formerRating.setFitch_rating(updatedRatingEntity.getFitch_rating());
         formerRating.setOrder_number(updatedRatingEntity.getOrder_number());
-        // TODO: check required fields, if valid call service to update Rating and return list Rating
         return ratingRepository.save(formerRating);
 
     }

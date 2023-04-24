@@ -16,6 +16,13 @@ import java.sql.Timestamp;
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class CurvePoint {
+    /**
+     * This entity class defines Curvepoint objects. It has two constructors : one without parameter,
+     * one with parameters 'curve_point_id', 'term' , 'value'.
+     *
+     * @author Emmanuelle Bonnemay
+     * created on 23/04/2023
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="curve_id")
@@ -44,6 +51,4 @@ public class CurvePoint {
 
     @Column(name = "creation_date")
     private Timestamp creation_date;
-
-    // TODO: Map columns in data table CURVEPOINT with corresponding java fields
 }

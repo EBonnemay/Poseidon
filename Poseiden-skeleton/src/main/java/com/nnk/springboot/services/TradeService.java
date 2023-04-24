@@ -8,7 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * This class handles Trade CRUD operations by calling Trade Repository : save, read (get Trade by Id , find All Trades), update, delete.
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 
 @Service
 public class TradeService{
@@ -43,7 +47,6 @@ public class TradeService{
         formerTrade.setAccount(updatedTradeEntity.getAccount());
         formerTrade.setBuy_quantity(updatedTradeEntity.getBuy_quantity());
         formerTrade.setType(updatedTradeEntity.getType());
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
         return tradeRepository.save(formerTrade);
 
     }

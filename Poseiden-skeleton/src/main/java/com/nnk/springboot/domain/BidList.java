@@ -10,7 +10,13 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
 
 import java.sql.Timestamp;
-//@Data
+/**
+ * This entity class defines BidList objects. It has two constructors : one without parameter,
+ * one with parameters 'type', 'account' , 'bid_quantity'
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 
 @Entity
 @Table(name = "bidlist")
@@ -79,6 +85,4 @@ public class BidList {
     String source_list_id;
     @Column (name = "side")
     String side;
-
-    // TODO: Map columns in data table BIDLIST with corresponding java fields
 }

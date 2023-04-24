@@ -13,7 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+/**
+ * this class is a controller dedicated to Rating entities ; it handles user requests related to Rating :
+ * displaying several pages (list, update form, add form), retrieving Rating data when necessary,
+ * and handling crud requests by calling Rating Service.
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ *
+ */
 
 @Controller
 public class RatingController {
@@ -26,8 +34,6 @@ public class RatingController {
     public String homeDisplayRatingList(Model model) {
         log.info("REQUEST /rating/list");
         model.addAttribute("listOfRatings", ratingService.findAll());
-        log.info("attribute ratingList added to Model");
-        // TODO: find all Rating, add to model
         return "rating/list";
     }
 //DISPLAY ADD RATING FORM
@@ -39,7 +45,6 @@ public class RatingController {
 //CREATE NEW RATING
     @PostMapping("/rating/validate")
     public String validateRating(@Valid Rating rating, BindingResult result, Model model)  {
-        // TODO: check data valid and save to db, after saving return Rating list
         log.info("POST /rating/validate");
         if (result.hasErrors()) {
             log.error("rating to add has errors");
@@ -47,7 +52,6 @@ public class RatingController {
         }
         try{
             ratingService.validateNewRating(rating);
-            log.info("rating validated with id " + rating.getRating_id());
         }catch(Exception e){
             log.error("rating could not be created" );
             return "rating/add";
@@ -61,8 +65,6 @@ public class RatingController {
             log.info("GET /rating/update/{id} with id " + id);
             Rating rating = ratingService.getRatingById(id);
             model.addAttribute("rating", rating);
-            log.info("attribute added to Model : rating with id " + rating.getRating_id());
-            // TODO: get Rating by Id and to model then show to the form
             return "rating/update";
         }catch(Exception e){
             log.error("rating update form with id "+id+" could not be displayed");
@@ -74,10 +76,7 @@ public class RatingController {
     @PostMapping("/rating/update/{id}")
     public String updateRating(@PathVariable("id") Integer id, @Valid Rating updatedRatingEntity,
                              BindingResult result, Model model) {
-        // TODO: check required fields, if valid call service to update Rating and return Rating list
         log.info("POST /rating/update/{id} with id " + id);
-
-
         try {
             if (result.hasErrors()) {
                 log.error("rating to update has errors");
@@ -85,8 +84,6 @@ public class RatingController {
             }
             Rating updatedAndSavedRating = ratingService.updateRating(id, updatedRatingEntity);
             model.addAttribute("listOfRatings", ratingService.findAll());
-            log.info("listOfRatings added to model");
-
         } catch (Exception e) {
             log.error("rating with id " + id + " could not be update");
             return "redirect:/rating/update/"+id+"";
@@ -99,8 +96,6 @@ public class RatingController {
         try {
             log.info("GET /rating/delete/{id} with id " + id);
             ratingService.deleteRating(id);
-            // TODO: Find Rating by Id and delete the Rating, return to Rating list
-            log.info("rating with id " + id + "deleted");
             return "redirect:/rating/list";
         }catch(Exception e){
             log.error("rating with id "+id+" could not be deleted");

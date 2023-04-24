@@ -11,6 +11,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+/**
+ * This class handles CurvePoint CRUD operations by calling CurvePoint Repository : save, read (get CurvePoint by Id , find All CurvePoints), update, delete.
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
     public class CurvePointService{
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
 

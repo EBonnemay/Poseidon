@@ -11,15 +11,25 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * This class is a controller dedicated to BidList entities ; it handles user requests related to BidList :
+ * displaying several pages (list, update form, add form), retrieving BidList data when necessary,
+ * and handling crud requests by calling BidList Service.
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ *
+ */
 @Controller
+
 public class BidListController {
+
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
     //@Autowired
     private BidListService bidListService;
     public BidListController(BidListService bidListService){
         this.bidListService = bidListService;
     }
-    // TODO: Inject Bid service
 
 
 //DISPLAY 'LIST OF BIDLISTS' PAGE
@@ -27,8 +37,6 @@ public class BidListController {
     public String homeDisplayBidListsPage(Model model) {
             log.info("REQUEST /bidList/list");
             model.addAttribute("listOfBidList", bidListService.findAll());
-            log.info("attribute listOfBidList added to Model");
-            // TODO: call service find all bids to show to the view
             return "bidList/list";
     }
 //DISPLAY 'ADD BIDLIST' FORM
@@ -46,11 +54,8 @@ public class BidListController {
             return ("bidList/add");
         }
         try {
-            log.info("no errors in bidlist");
             bidListService.validateNewBidList(bidList);
-            log.info("bidlist validated with account " + bidList.getAccount());
         } catch (Exception e ) {
-            // TODO: check data valid and save to db, after saving return bid list
             log.error("BidList could not be created");
             return "bidList/add";
         }
@@ -61,10 +66,8 @@ public class BidListController {
     public String displayUpdateForm(@PathVariable("id") Integer id, Model model) {
         try{
             log.info("GET /bidList/update/{id} with id " + id);
-            // TODO: get Bid by Id and to model then show to the form
             BidList bidList = bidListService.getBidListById(id);
             model.addAttribute("bidList", bidList);
-            log.info("attribute added to Model : bidList with id "+ bidList.getBid_list_id());
             return "bidList/update";
         }catch(Exception e){
             log.error("bidList update form with id "+id+" could not be displayed");
@@ -83,7 +86,6 @@ public class BidListController {
             }
             BidList updatedAndSavedBidList = bidListService.updateBidList(id, updatedBidListEntity);
             model.addAttribute("listOfBidList", bidListService.findAll());
-            log.info("attribute listOfBidList added to model");
 
         }catch(Exception e){
             log.error("bidList with id "+ id+ " could not be updated");
@@ -96,9 +98,7 @@ public class BidListController {
     public String deleteBid(@PathVariable("id") Integer id, Model model) {
         try {
             log.info("GET /bidList/delete/{id} with id " + id);
-            // TODO: Find Bid by Id and delete the bid, return to Bid list
             bidListService.deleteBidList(id);
-            log.info("bidList with id " + id + "deleted");
             return "redirect:/bidList/list";
         }catch(Exception e){
             log.error("bidList with id "+ id+ " could not be deleted");

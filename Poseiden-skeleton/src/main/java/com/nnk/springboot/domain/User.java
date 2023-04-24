@@ -6,7 +6,13 @@ import lombok.*;
 
 import jakarta.persistence.*;
 
-
+/**
+ * This entity class defines User objects. It has two constructors : one without parameter,
+ * one with parameters 'username', 'password' , 'fullname', 'role'
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 @Entity
 @Table(name = "user")
 @Getter

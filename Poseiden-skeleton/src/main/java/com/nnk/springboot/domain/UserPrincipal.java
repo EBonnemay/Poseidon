@@ -10,13 +10,22 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails {
+    /**
+     UserPrincipal is an implementation of the UserDetails interface that wraps a User object.
+     It provides methods to get user credentials and authorities required for authentication and authorization purposes.
+     */
     private User user;
 
 
     public UserPrincipal(User user) {
         this.user = user;
     }
+    /**
 
+     This method returns a collection of granted authorities (like ROLE_ADMIN or ROLE_USER) for the user.
+     @return a collection of granted authorities for the user.
+
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();

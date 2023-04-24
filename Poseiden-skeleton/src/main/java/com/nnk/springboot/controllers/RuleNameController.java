@@ -13,24 +13,28 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-
+/**
+ * This class is a controller dedicated to RuleName entities ; it handles user requests related to RuleName :
+ * displaying several pages (list, update form, add form), retrieving RuleName data when necessary,
+ * and handling crud requests by calling RuleName Service.
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ *
+ */
 
 @Controller
 public class RuleNameController {
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
-
     private RuleNameService ruleNameService;
     public RuleNameController(RuleNameService ruleNameService){
         this.ruleNameService = ruleNameService;
     }
-    // TODO: Inject RuleName service
 //DISPLAY LIST OF RULENAMES PAGE
     @RequestMapping("/ruleName/list")
     public String homeDisplayRuleNamesList(Model model) {
         log.info("REQUEST /ruleName/list");
         model.addAttribute("listOfRulenames", ruleNameService.findAll());
-        // TODO: find all RuleName, add to model
-        log.info("attribute listOfRuleNames added to Model");
         return "ruleName/list";
     }
 //DISPLAY ADD RULENAME FORM
@@ -45,14 +49,12 @@ public class RuleNameController {
     @PostMapping("/ruleName/validate")
     public String validateRuleName(@Valid RuleName ruleName, BindingResult result, Model model) {
         log.info("POST /ruleName/validate");
-        // TODO: check data valid and save to db, after saving return RuleName list
         if(result.hasErrors()){
             log.error("ruleName to create has errors");
             return "ruleName/add";
         }
         try{
             ruleNameService.validateNewRuleName(ruleName);
-            log.info("ruleName validated with id "+ ruleName.getRulename_id());
         }catch(Exception e){
             log.error("ruleName could not be created");
             return "ruleName/add";
@@ -66,8 +68,6 @@ public class RuleNameController {
             log.info("GET /ruleName/update/{id} with id "+ id);
             RuleName ruleName = ruleNameService.getRuleNameById(id);
             model.addAttribute("ruleName", ruleName);
-            log.info("attribute added to model : ruleName with id "+ id );
-            // TODO: get RuleName by Id and to model then show to the form
             return "ruleName/update";
         }catch(Exception e){
             log.error("ruleName update form with id "+id+" could not be displayed");
@@ -79,10 +79,7 @@ public class RuleNameController {
     @PostMapping("/ruleName/update/{id}")
     public String updateRuleName(@PathVariable("id") Integer id, @Valid RuleName updatedRuleNameEntity,
                              BindingResult result, Model model) {
-
-        // TODO: check required fields, if valid call service to update RuleName and return RuleName list
         log.info("POST /ruleName/update/{id} with id "+id);
-
         try{
             if (result.hasErrors()) {
                 log.error("ruleName to update has errors");
@@ -90,8 +87,6 @@ public class RuleNameController {
             }
             RuleName updatedAndSavedRuleName = ruleNameService.updateRuleName(id, updatedRuleNameEntity );
             model.addAttribute("listOfRulenames", ruleNameService.findAll());
-            log.info("attribute listOfRulenames added to model");
-
         }catch(Exception e){
             log.error("ruleName with id "+ id+ " could not be updated");
             return "redirect:/ruleName/update/"+id+"";
@@ -105,8 +100,6 @@ public class RuleNameController {
         try{
             log.info("GET /ruleName/delete/{id}");
             ruleNameService.deleteRuleName(id);
-            // TODO: Find RuleName by Id and delete the RuleName, return to Rule list
-            log.info("ruleName with id "+ id + "deleted");
             return "redirect:/ruleName/list";
         }catch(Exception e){
             log.error("ruleName with id "+id+ " could not be deleted");

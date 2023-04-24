@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+/**
+ * This class handles BidList CRUD operations by calling BidList Repository : save, read (get BidList by Id , find All BidLists), update, delete.
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 
 @Service
     public class BidListService {
@@ -38,7 +43,6 @@ import java.util.Optional;
         formerBidList.setAccount(updatedBidListEntity.getAccount());
         formerBidList.setBid_quantity(updatedBidListEntity.getBid_quantity());
         formerBidList.setType(updatedBidListEntity.getType());
-        // TODO: check required fields, if valid call service to update Bid and return list Bid
         return bidListRepository.save(formerBidList);
 
 

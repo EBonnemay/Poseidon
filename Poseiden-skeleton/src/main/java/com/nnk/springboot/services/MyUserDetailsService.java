@@ -11,6 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class implements the UserDetailsService interface. It is used by the Authentication Provider to load details about the user during authentication.
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 @Service
 public class MyUserDetailsService implements UserDetailsService {
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");

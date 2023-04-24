@@ -15,6 +15,14 @@ import java.sql.Timestamp;
 @Setter
 @RequiredArgsConstructor
 @NoArgsConstructor
+
+/**
+ * This entity class defines Trade objects. It has two constructors : one without parameter,
+ * one with parameters 'account', 'type' , 'buy_quantity'
+ *
+ * @author Emmanuelle Bonnemay
+ * created on 23/04/2023
+ */
 public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

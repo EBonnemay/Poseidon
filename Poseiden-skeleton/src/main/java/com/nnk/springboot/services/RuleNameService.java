@@ -12,6 +12,11 @@ import java.util.Optional;
 
 @Service
 public class RuleNameService {
+    /**
+     * This class handles RuleName CRUD operations by calling RuleName Repository : save, read (get RuleName by Id , find All RuleNames), update, delete.
+     * @author Emmanuelle Bonnemay
+     * created on 23/04/2023
+     */
     static final Logger log = LogManager.getLogger("com.nnk.springboot.MyAppLogger");
     private RuleNameRepository ruleNameRepository;
 
@@ -45,7 +50,6 @@ public class RuleNameService {
         formerRuleName.setTemplate(updatedRuleNameEntity.getTemplate());
         formerRuleName.setSql_str(updatedRuleNameEntity.getSql_str());
         formerRuleName.setSql_part(updatedRuleNameEntity.getSql_part());
-        // TODO: check required fields, if valid call service to update RuleName and return list RuleName
         return ruleNameRepository.save(formerRuleName);
 
     }
